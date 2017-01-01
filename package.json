@@ -7,7 +7,7 @@
   "author": "Irakli Gozalishvili <rfobic@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Gozala/querystring.git",
+    "url": "git://github.com/balu-/querystring.git",
     "web": "https://github.com/Gozala/querystring"
   },
   "bugs": {
