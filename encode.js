@@ -38,6 +38,7 @@ var stringifyPrimitive = function(v) {
 };
 
 module.exports = function(obj, sep, eq, name) {
+  var that = this;
   sep = sep || '&';
   eq = eq || '=';
   if (obj === null) {
@@ -46,21 +47,21 @@ module.exports = function(obj, sep, eq, name) {
 
   if (typeof obj === 'object') {
     return map(objectKeys(obj), function(k) {
-      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      var ks = that.escape(stringifyPrimitive(k)) + eq;
       if (isArray(obj[k])) {
         return map(obj[k], function(v) {
-          return ks + encodeURIComponent(stringifyPrimitive(v));
+          return ks + that.escape(stringifyPrimitive(v));
         }).join(sep);
       } else {
-        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+        return ks + that.escape(stringifyPrimitive(obj[k]));
       }
     }).join(sep);
 
   }
 
   if (!name) return '';
-  return encodeURIComponent(stringifyPrimitive(name)) + eq +
-         encodeURIComponent(stringifyPrimitive(obj));
+  return that.escape(stringifyPrimitive(name)) + eq +
+          that.escape(stringifyPrimitive(obj));
 };
 
 var isArray = Array.isArray || function (xs) {
